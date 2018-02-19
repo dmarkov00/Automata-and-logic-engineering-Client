@@ -4,7 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {FormulaComponent} from './components/formula/formula.component';
-import {AssignmentOneService} from "./services/assignment-one.service";
+import {AssignmentResultService} from "./services/assignment-result.service";
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import {AssignmentOneService} from "./services/assignment-one.service";
     HttpClientModule,
     BrowserModule
   ],
-  providers: [AssignmentOneService],
+  providers: [AssignmentResultService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
