@@ -3,7 +3,7 @@
     <input #formula/>
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="calculateResult(formula.value);">
+  <button type="button" class="btn btn-primary" (click)="calculateResult(formula.value);">
     add
   </button>
 </div>
