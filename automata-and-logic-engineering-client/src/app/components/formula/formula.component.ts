@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AssignmentResultService} from "../../services/assignment-result.service";
 
 @Component({
   selector: 'app-formula',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormulaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private assignmentResultService: AssignmentResultService) {
+
+  }
+
+  calculateResult(formula: string) {
+
+    console.log('this wokeds');
+    // this.assignmentResultService.calculateAssignmentOneResult(formula).subscribe()
+
+  }
+
 
   ngOnInit() {
   }

@@ -1,9 +1,9 @@
 <div>
   <label>Formula:
-    <input #heroName />
+    <input #formula/>
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(heroName.value);">
+  <button (click)="calculateResult(formula.value);">
     add
   </button>
 </div>
