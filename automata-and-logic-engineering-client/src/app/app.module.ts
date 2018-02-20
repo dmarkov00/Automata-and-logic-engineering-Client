@@ -7,13 +7,15 @@ import {FormulaComponent} from './components/formula/formula.component';
 import {AssignmentResultService} from "./services/assignment-result.service";
 import { TabBarComponent } from './components/tab-bar/tab-bar.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { CalculationResultComponent } from './components/calculation-result/calculation-result.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FormulaComponent,
-    TabBarComponent
+    TabBarComponent,
+    CalculationResultComponent
   ],
   imports: [
     HttpClientModule,
