@@ -4,7 +4,10 @@ import {CalculationResultComponent} from "./components/calculation-result/calcul
 
 
 const routes: Routes = [
-  {path: 'assignment1', component: CalculationResultComponent}
+  {path: 'assignment1', component: CalculationResultComponent},
+  {path: 'assignment2', component: CalculationResultComponent},
+  {path: 'assignment3', component: CalculationResultComponent}
+
 ];
 
 @NgModule({
