@@ -20,7 +20,7 @@ export class AssignmentResultService {
   }
 
   calculateAssignmentOneResult(formula: string): Observable<AssignmentOneResult> {
-    return this.http.post<AssignmentOneResult>(this.serviceUrl, formula, httpOptions).pipe(
+    return this.http.post<AssignmentOneResult>(this.serviceUrl, {"formula": formula}, httpOptions).pipe(
       catchError(this.handleError<AssignmentOneResult>("calculateAssignmentOneResult"))
     );
   }

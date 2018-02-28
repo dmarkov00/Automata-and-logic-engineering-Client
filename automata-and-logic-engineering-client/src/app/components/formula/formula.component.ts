@@ -22,9 +22,7 @@ export class FormulaComponent implements OnInit {
     this.assignmentResultService.calculateAssignmentOneResult(formula)
       .subscribe(result => this.dataService.assignmentOneResult = result);
 
-
   }
-
 
   ngOnInit() {
   }
