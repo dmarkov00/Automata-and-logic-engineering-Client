@@ -5,10 +5,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {FormulaComponent} from './components/formula/formula.component';
 import {AssignmentResultService} from "./services/assignment-result.service";
-import { TabBarComponent } from './components/tab-bar/tab-bar.component';
-import { AppRoutingModule } from './/app-routing.module';
-import { CalculationResultComponent } from './components/calculation-result/calculation-result.component';
-import { DataService } from './data.service';
+import {TabBarComponent} from './components/tab-bar/tab-bar.component';
+import {AppRoutingModule} from './/app-routing.module';
+import {CalculationResultComponent} from './components/calculation-result/calculation-result.component';
+import {DataService} from './services/data.service';
 
 
 @NgModule({

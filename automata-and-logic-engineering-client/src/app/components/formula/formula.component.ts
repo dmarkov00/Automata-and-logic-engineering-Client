@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AssignmentResultService} from "../../services/assignment-result.service";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-formula',
@@ -8,7 +9,7 @@ import {AssignmentResultService} from "../../services/assignment-result.service"
 })
 export class FormulaComponent implements OnInit {
 
-  constructor(private assignmentResultService: AssignmentResultService) {
+  constructor(private assignmentResultService: AssignmentResultService, private dataService: DataService) {
 
   }
 
@@ -19,6 +20,7 @@ export class FormulaComponent implements OnInit {
     }
 
     this.assignmentResultService.calculateAssignmentOneResult(formula)
+      .subscribe(result => this.dataService.assignmentOneResult = result);
   }
 
 
