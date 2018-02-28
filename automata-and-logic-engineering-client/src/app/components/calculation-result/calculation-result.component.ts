@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-calculation-result',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculationResultComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dataService: DataService) {
+  }
 
   ngOnInit() {
   }
