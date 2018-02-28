@@ -1,1 +1,4 @@
-<img src="data:image/png;base64,{{dataService.assignmentOneResult.imageGraph}}" alt="Formula tree">
+<div *ngIf="dataService.assignmentOneResult">
+  <img src="data:image/png;base64,{{dataService.assignmentOneResult.graphImage}}" alt="Formula tree">
+  <!--<p>{{dataService.assignmentOneResult.imageGraph}}</p>-->
+</div>

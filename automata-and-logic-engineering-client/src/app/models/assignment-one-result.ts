@@ -1,5 +1,5 @@
 export class AssignmentOneResult {
-  imageGraph: string;
+  graphImage: string;
 }
 
 

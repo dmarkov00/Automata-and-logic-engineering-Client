@@ -14,7 +14,7 @@ const httpOptions = {
 @Injectable()
 export class AssignmentResultService {
 
-  private serviceUrl = "http://localhost:8080";
+  private serviceUrl = "http://localhost:8080/calculate/1";
 
   constructor(private http: HttpClient) {
   }
