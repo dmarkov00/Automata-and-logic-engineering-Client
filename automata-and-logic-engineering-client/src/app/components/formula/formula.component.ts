@@ -13,10 +13,12 @@ export class FormulaComponent implements OnInit {
   }
 
   calculateResult(formula: string) {
+    formula = formula.trim();
+    if (!formula) {
+      return;
+    }
 
-    console.log('this wokeds');
-    // this.assignmentResultService.calculateAssignmentOneResult(formula).subscribe()
-
+    this.assignmentResultService.calculateAssignmentOneResult(formula)
   }
 
 

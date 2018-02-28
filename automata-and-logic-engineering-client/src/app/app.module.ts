@@ -8,6 +8,7 @@ import {AssignmentResultService} from "./services/assignment-result.service";
 import { TabBarComponent } from './components/tab-bar/tab-bar.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { CalculationResultComponent } from './components/calculation-result/calculation-result.component';
+import { DataService } from './data.service';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { CalculationResultComponent } from './components/calculation-result/calc
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [AssignmentResultService],
+  providers: [AssignmentResultService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
