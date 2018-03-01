@@ -1,3 +1,7 @@
-<div *ngIf="dataService.assignmentOneResult">
-  <img src="data:image/png;base64,{{dataService.assignmentOneResult.graphImage}}" alt="Formula tree">
+<div *ngIf="dataService.assignmentOneResult" class="row">
+
+  <div class="col-12 offset-4">
+    <img class="center-block" src="data:image/png;base64,{{dataService.assignmentOneResult.graphImage}}" alt="Formula tree">
+  </div>
+
 </div>
