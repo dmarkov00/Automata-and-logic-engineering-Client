@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {AssignmentOneResult} from "../models/assignment-one-result";
+import {AssignmentResult} from "../models/assignment-result";
 
 @Injectable()
 export class DataService {
 
-  assignmentOneResult: AssignmentOneResult;
+
+  assignmentResult: AssignmentResult;
 
   constructor() {
   }

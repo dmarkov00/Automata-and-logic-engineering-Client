@@ -6,6 +6,8 @@ import {of} from 'rxjs/observable/of';
 import {catchError, map, tap} from 'rxjs/operators';
 
 import {AssignmentOneResult} from './../models/assignment-one-result';
+import {AssignmentTwoResult} from "../models/assignment-two-result";
+import {AssignmentResult} from "../models/assignment-result";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -14,14 +16,32 @@ const httpOptions = {
 @Injectable()
 export class AssignmentResultService {
 
-  private serviceUrl = "http://localhost:8080/calculate/1";
+  private serviceUrl = "http://localhost:8080/calculate/";
 
   constructor(private http: HttpClient) {
   }
 
-  calculateAssignmentOneResult(formula: string): Observable<AssignmentOneResult> {
-    return this.http.post<AssignmentOneResult>(this.serviceUrl, {"formula": formula}, httpOptions).pipe(
+  calculateAssignmentResult(formula: string, id: number): Observable<AssignmentResult> {
+
+    switch (id) {
+      case 1:
+        return this.calculateAssignmentOneResult(formula, id);
+
+      case 2:
+        return this.calculateAssignmentTwoResult(formula, id);
+
+    }
+  }
+
+  calculateAssignmentOneResult(formula: string, id: number): Observable<AssignmentOneResult> {
+    return this.http.post<AssignmentOneResult>(this.serviceUrl + id, {"formula": formula}, httpOptions).pipe(
       catchError(this.handleError<AssignmentOneResult>("calculateAssignmentOneResult"))
+    );
+  }
+
+  calculateAssignmentTwoResult(formula: string, id: number): Observable<AssignmentTwoResult> {
+    return this.http.post<AssignmentTwoResult>(this.serviceUrl + id, {"formula": formula}, httpOptions).pipe(
+      catchError(this.handleError<AssignmentTwoResult>("calculateAssignmentOneResult"))
     );
   }
 
@@ -31,7 +51,7 @@ export class AssignmentResultService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T>(operation = 'operation', result?: T) {
+  handleError<T>(operation = 'operation', result ?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

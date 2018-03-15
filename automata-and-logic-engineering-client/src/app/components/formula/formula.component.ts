@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AssignmentResultService} from "../../services/assignment-result.service";
 import {DataService} from "../../services/data.service";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-formula',
@@ -9,19 +10,20 @@ import {DataService} from "../../services/data.service";
 })
 export class FormulaComponent implements OnInit {
 
-  constructor(private assignmentResultService: AssignmentResultService, private dataService: DataService) {
-
+  constructor(private assignmentResultService: AssignmentResultService,
+              private dataService: DataService,
+              private route: ActivatedRoute,) {
   }
 
-  calculateResult(formula: string) {
+  calculateResult(formula: string): void {
     formula = formula.trim();
     if (!formula) {
       return;
     }
-
-    this.assignmentResultService.calculateAssignmentOneResult(formula)
+    const assignmentID = +this.route.snapshot.paramMap.get('id');
+    this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
       .subscribe(result => {
-          this.dataService.assignmentOneResult = result
+          this.dataService.assignmentResult = result
         }
       );
   }
