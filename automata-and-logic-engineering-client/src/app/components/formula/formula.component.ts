@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AssignmentResultService} from "../../services/assignment-result.service";
-import {DataService} from "../../services/data.service";
-import {ActivatedRoute} from '@angular/router';
+import {AssignmentResultService} from '../../services/assignment-result.service';
+import {DataService} from '../../services/data.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-formula',
@@ -20,17 +21,19 @@ export class FormulaComponent implements OnInit {
     if (!formula) {
       return;
     }
-    const assignmentID = +this.route.snapshot.paramMap.get('id');
 
+    const assignmentID = 1;
     this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
       .subscribe(result => {
-        this.dataService.assignmentResult = result
+        console.log(result);
+        // this.dataService.assignmentResult = result;
       });
-
 
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => console.log(params['id']));
+
   }
 
 }

@@ -21,15 +21,13 @@ export class AssignmentResultService {
   constructor(private http: HttpClient) {
   }
 
-  calculateAssignmentResult(formula: string, id: number): Observable<AssignmentResult> {
-
+  calculateAssignmentResult(formula: string, id: number): Observable<any> {
+    console.log('here');
+    console.log(id);
     switch (id) {
       case 1:
-        console.log('assigment-result');
-        this.calculateAssignmentOneResult(formula, id).subscribe(result => {
-          return result;
-        });
-        break;
+        return this.calculateAssignmentOneResult(formula, id);
+      // break;
       case 2:
         return this.calculateAssignmentTwoResult(formula, id);
 

@@ -1,4 +1,4 @@
-import {AssignmentResult} from "./assignment-result";
+import {AssignmentResult} from './assignment-result';
 
 export interface AssignmentTwoResult extends AssignmentResult {
 
