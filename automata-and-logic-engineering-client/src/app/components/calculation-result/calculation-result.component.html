@@ -1,7 +1,12 @@
-<div *ngIf="dataService.assignmentResult" class="row">
-
-  <div class="col-12 offset-4">
-    <img class="center-block" src="data:image/png;base64,{{dataService.assignmentResult.graphImage}}" alt="Formula tree">
+<div [ngSwitch]="defineType(dataService.assignmentResult)" class="row justify-content-md-center">
+  <div class="row justify-content-md-center">
+    <div *ngSwitchCase="1" class="col ">
+      <img class="" src="data:image/png;base64,{{dataService.assignmentResult.graphImage}}"
+           alt="Formula tree">
+    </div>
   </div>
-
+  <div *ngSwitchCase="2" class="col ">
+    {{dataService.assignmentResult.tableResults}}
+    
+  </div>
 </div>

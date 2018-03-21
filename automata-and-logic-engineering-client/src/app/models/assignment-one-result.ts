@@ -5,6 +5,7 @@ export class AssignmentOneResult {
   constructor(graphImage: string) {
     this.graphImage = graphImage;
   }
+
 }
 
 
