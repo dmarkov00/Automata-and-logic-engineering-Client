@@ -10,16 +10,15 @@ import {AssignmentOneResult} from '../../models/assignment-one-result';
 export class CalculationResultComponent implements OnInit {
 
   constructor(public dataService: DataService) {
-    // this.defineType();
   }
 
   ngOnInit() {
   }
 
   private defineType(): void {
-
-    const calculation = this.dataService.assignmentResult;
-    console.log(this.test(calculation));
+    //
+    // const calculation = this.dataService.assignmentResult;
+    // test(calculation);
 
   }
 

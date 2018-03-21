@@ -1,6 +1,6 @@
 <div>
   <label>Formula:
-    <input #formula/>
+    <input #formula value="=(>(A,B),|(~(A),C))"/>
   </label>
   <button class="btn btn-danger" (click)="calculateResult(formula.value);">
     Calculate result

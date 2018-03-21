@@ -8,6 +8,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {AssignmentOneResult} from '../models/assignment-one-result';
 import {AssignmentTwoResult} from '../models/assignment-two-result';
 import {AssignmentResult} from '../models/assignment-result';
+import 'rxjs/add/operator/map';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -21,23 +22,21 @@ export class AssignmentResultService {
   constructor(private http: HttpClient) {
   }
 
-  calculateAssignmentResult(formula: string, id: number): Observable<any> {
-    console.log('here');
-    console.log(id);
+  calculateAssignmentResult(formula: string, id: number): Observable<AssignmentOneResult> {
+
     switch (id) {
       case 1:
         return this.calculateAssignmentOneResult(formula, id);
-      // break;
       case 2:
-        return this.calculateAssignmentTwoResult(formula, id);
+      // return this.calculateAssignmentTwoResult(formula, id);
 
     }
   }
 
   calculateAssignmentOneResult(formula: string, id: number): Observable<AssignmentOneResult> {
-    return this.http.post<AssignmentOneResult>(this.baseUrl + id, {'formula': formula}, httpOptions).pipe(
-      catchError(this.handleError<AssignmentOneResult>('calculateAssignmentOneResult'))
-    );
+    return this.http.post<AssignmentOneResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
+      return new AssignmentOneResult(res.graphImage);
+    });
   }
 
   calculateAssignmentTwoResult(formula: string, id: number): Observable<AssignmentTwoResult> {

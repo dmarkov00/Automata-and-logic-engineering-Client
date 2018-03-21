@@ -3,6 +3,7 @@ import {AssignmentResultService} from '../../services/assignment-result.service'
 import {DataService} from '../../services/data.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import {AssignmentOneResult} from '../../models/assignment-one-result';
 
 @Component({
   selector: 'app-formula',
@@ -16,6 +17,8 @@ export class FormulaComponent implements OnInit {
               private route: ActivatedRoute) {
   }
 
+  result: AssignmentOneResult;
+
   calculateResult(formula: string): void {
     formula = formula.trim();
     if (!formula) {
@@ -26,7 +29,8 @@ export class FormulaComponent implements OnInit {
     this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
       .subscribe(result => {
         console.log(result);
-        // this.dataService.assignmentResult = result;
+        console.log(result instanceof AssignmentOneResult);
+        this.dataService.assignmentResult = result;
       });
 
   }
