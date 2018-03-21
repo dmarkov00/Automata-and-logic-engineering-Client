@@ -12,7 +12,7 @@ export class FormulaComponent implements OnInit {
 
   constructor(private assignmentResultService: AssignmentResultService,
               private dataService: DataService,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute) {
   }
 
   calculateResult(formula: string): void {
@@ -21,11 +21,13 @@ export class FormulaComponent implements OnInit {
       return;
     }
     const assignmentID = +this.route.snapshot.paramMap.get('id');
+
     this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
       .subscribe(result => {
-          this.dataService.assignmentResult = result
-        }
-      );
+        this.dataService.assignmentResult = result
+      });
+
+
   }
 
   ngOnInit() {

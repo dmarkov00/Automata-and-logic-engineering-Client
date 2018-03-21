@@ -5,9 +5,9 @@ import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import {catchError, map, tap} from 'rxjs/operators';
 
-import {AssignmentOneResult} from './../models/assignment-one-result';
-import {AssignmentTwoResult} from "../models/assignment-two-result";
-import {AssignmentResult} from "../models/assignment-result";
+import {AssignmentOneResult} from '../models/assignment-one-result';
+import {AssignmentTwoResult} from '../models/assignment-two-result';
+import {AssignmentResult} from '../models/assignment-result';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,7 +16,7 @@ const httpOptions = {
 @Injectable()
 export class AssignmentResultService {
 
-  private serviceUrl = "http://localhost:8080/calculate/";
+  private baseUrl = 'http://localhost:8080/calculate/';
 
   constructor(private http: HttpClient) {
   }
@@ -25,8 +25,11 @@ export class AssignmentResultService {
 
     switch (id) {
       case 1:
-        return this.calculateAssignmentOneResult(formula, id);
-
+        console.log('assigment-result');
+        this.calculateAssignmentOneResult(formula, id).subscribe(result => {
+          return result;
+        });
+        break;
       case 2:
         return this.calculateAssignmentTwoResult(formula, id);
 
@@ -34,14 +37,14 @@ export class AssignmentResultService {
   }
 
   calculateAssignmentOneResult(formula: string, id: number): Observable<AssignmentOneResult> {
-    return this.http.post<AssignmentOneResult>(this.serviceUrl + id, {"formula": formula}, httpOptions).pipe(
-      catchError(this.handleError<AssignmentOneResult>("calculateAssignmentOneResult"))
+    return this.http.post<AssignmentOneResult>(this.baseUrl + id, {'formula': formula}, httpOptions).pipe(
+      catchError(this.handleError<AssignmentOneResult>('calculateAssignmentOneResult'))
     );
   }
 
   calculateAssignmentTwoResult(formula: string, id: number): Observable<AssignmentTwoResult> {
-    return this.http.post<AssignmentTwoResult>(this.serviceUrl + id, {"formula": formula}, httpOptions).pipe(
-      catchError(this.handleError<AssignmentTwoResult>("calculateAssignmentOneResult"))
+    return this.http.post<AssignmentTwoResult>(this.baseUrl + id, {'formula': formula}, httpOptions).pipe(
+      catchError(this.handleError<AssignmentTwoResult>('calculateAssignmentOneResult'))
     );
   }
 
