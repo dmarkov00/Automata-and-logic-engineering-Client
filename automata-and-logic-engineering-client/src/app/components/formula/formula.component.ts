@@ -24,12 +24,13 @@ export class FormulaComponent implements OnInit {
     if (!formula) {
       return;
     }
+    // ToDo: retrieve the id from the url
 
-    const assignmentID = 1;
+    const assignmentID = 2;
     this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
       .subscribe(result => {
         console.log(result);
-        console.log(result instanceof AssignmentOneResult);
+        // console.log(result instanceof AssignmentOneResult);
         this.dataService.assignmentResult = result;
       });
 

@@ -3,11 +3,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import {catchError, map, tap} from 'rxjs/operators';
+// import {catchError, map, tap} from 'rxjs/operators';
 
 import {AssignmentOneResult} from '../models/assignment-one-result';
 import {AssignmentTwoResult} from '../models/assignment-two-result';
-import {AssignmentResult} from '../models/assignment-result';
 import 'rxjs/add/operator/map';
 
 const httpOptions = {
@@ -22,13 +21,13 @@ export class AssignmentResultService {
   constructor(private http: HttpClient) {
   }
 
-  calculateAssignmentResult(formula: string, id: number): Observable<AssignmentOneResult> {
+  calculateAssignmentResult(formula: string, id: number): Observable<any> {
 
     switch (id) {
       case 1:
         return this.calculateAssignmentOneResult(formula, id);
       case 2:
-      // return this.calculateAssignmentTwoResult(formula, id);
+      return this.calculateAssignmentTwoResult(formula, id);
 
     }
   }
@@ -40,9 +39,9 @@ export class AssignmentResultService {
   }
 
   calculateAssignmentTwoResult(formula: string, id: number): Observable<AssignmentTwoResult> {
-    return this.http.post<AssignmentTwoResult>(this.baseUrl + id, {'formula': formula}, httpOptions).pipe(
-      catchError(this.handleError<AssignmentTwoResult>('calculateAssignmentOneResult'))
-    );
+    return this.http.post<AssignmentTwoResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
+      return new AssignmentTwoResult(res.tableData, res.tableResults, res.hashCode);
+    });
   }
 
   /**

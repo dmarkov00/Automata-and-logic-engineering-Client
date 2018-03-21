@@ -4,9 +4,7 @@ import {AssignmentOneResult} from '../models/assignment-one-result';
 
 @Injectable()
 export class DataService {
-
-
-  assignmentResult: AssignmentOneResult;
+  assignmentResult: any;
 
   constructor() {
   }

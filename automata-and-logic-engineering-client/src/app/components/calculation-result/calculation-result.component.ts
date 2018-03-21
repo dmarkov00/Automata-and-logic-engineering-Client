@@ -14,16 +14,4 @@ export class CalculationResultComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  private defineType(): void {
-    //
-    // const calculation = this.dataService.assignmentResult;
-    // test(calculation);
-
-  }
-
-  private test(object: any): object is AssignmentOneResult {
-    return true;
-
-  }
 }
