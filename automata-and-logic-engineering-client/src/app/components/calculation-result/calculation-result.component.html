@@ -8,6 +8,7 @@
   <div *ngSwitchCase="2" class="col ">
 
     <table class="table table-sm">
+      <caption>Hash code: {{dataService.assignmentResult.hashCode}}</caption>
       <thead class="thead-light">
       <tr>
         <th scope="col" *ngFor="let dataCol of dataService.assignmentResult.tableData">{{dataCol}}</th>
