@@ -6,7 +6,20 @@
     </div>
   </div>
   <div *ngSwitchCase="2" class="col ">
-    {{dataService.assignmentResult.tableResults}}
-    
+
+    <table class="table table-sm">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col" *ngFor="let dataCol of dataService.assignmentResult.tableData">{{dataCol}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of dataService.assignmentResult.tableResults">
+        <td *ngFor="let result of getValuesFromMaps(row) ">{{result}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+
   </div>
 </div>

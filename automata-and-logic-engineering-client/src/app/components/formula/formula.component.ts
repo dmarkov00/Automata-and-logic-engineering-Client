@@ -29,15 +29,13 @@ export class FormulaComponent implements OnInit {
     const assignmentID = 2;
     this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
       .subscribe(result => {
-        console.log(result);
-        // console.log(result instanceof AssignmentOneResult);
+
         this.dataService.assignmentResult = result;
       });
 
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => console.log(params['id']));
 
   }
 

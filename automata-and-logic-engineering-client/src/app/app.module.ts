@@ -10,7 +10,6 @@ import {AppRoutingModule} from './/app-routing.module';
 import {CalculationResultComponent} from './components/calculation-result/calculation-result.component';
 import {DataService} from './services/data.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,

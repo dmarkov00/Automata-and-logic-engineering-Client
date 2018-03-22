@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {AssignmentOneResult} from '../../models/assignment-one-result';
 import {AssignmentTwoResult} from '../../models/assignment-two-result';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-calculation-result',
@@ -14,7 +15,6 @@ export class CalculationResultComponent implements OnInit {
   }
 
   defineType(result: any): number {
-    console.log(result);
     if (result instanceof AssignmentOneResult) {
       return 1;
     }
@@ -23,7 +23,20 @@ export class CalculationResultComponent implements OnInit {
     }
   }
 
+  getValuesFromMaps(map) {
+    console.log(map);
+    let results: number[] = [];
+    Object.keys(map).forEach(value => {
+      results.push(map[value]);
+
+    });
+    return results;
+  }
+
+
   ngOnInit() {
 
   }
 }
+
+
