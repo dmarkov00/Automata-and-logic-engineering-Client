@@ -3,7 +3,7 @@ import {AssignmentResultService} from '../../services/assignment-result.service'
 import {DataService} from '../../services/data.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {AssignmentOneResult} from '../../models/assignment-one-result';
+
 
 @Component({
   selector: 'app-formula',
@@ -15,9 +15,9 @@ export class FormulaComponent implements OnInit {
   constructor(private assignmentResultService: AssignmentResultService,
               private dataService: DataService,
               private route: ActivatedRoute) {
-  }
 
-  result: AssignmentOneResult;
+
+  }
 
   calculateResult(formula: string): void {
     formula = formula.trim();
@@ -25,12 +25,18 @@ export class FormulaComponent implements OnInit {
       return;
     }
     // ToDo: retrieve the id from the url
+    const id = this.route.snapshot.paramMap.get('id');
 
     const assignmentID = 2;
     this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
       .subscribe(result => {
 
-        this.dataService.assignmentResult = result;
+        if (result.status == 400) {
+          alert("Received an incorrect formula.")
+        }
+        else {
+          this.dataService.assignmentResult = result;
+        }
       });
 
   }

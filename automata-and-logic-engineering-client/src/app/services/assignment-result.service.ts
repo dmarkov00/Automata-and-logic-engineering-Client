@@ -8,9 +8,10 @@ import {of} from 'rxjs/observable/of';
 import {AssignmentOneResult} from '../models/assignment-one-result';
 import {AssignmentTwoResult} from '../models/assignment-two-result';
 import 'rxjs/add/operator/map';
+import {catchError} from "rxjs/operators";
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({'Content-Type': 'application/json', observe: 'response'})
 };
 
 @Injectable()
@@ -27,21 +28,26 @@ export class AssignmentResultService {
       case 1:
         return this.calculateAssignmentOneResult(formula, id);
       case 2:
-      return this.calculateAssignmentTwoResult(formula, id);
+        return this.calculateAssignmentTwoResult(formula, id);
 
     }
   }
 
   calculateAssignmentOneResult(formula: string, id: number): Observable<AssignmentOneResult> {
-    return this.http.post<AssignmentOneResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
-      return new AssignmentOneResult(res.graphImage);
-    });
+    return this.http.post<AssignmentOneResult>(this.baseUrl + id, {'formula': formula}, httpOptions)
+      .map(res => {
+        return new AssignmentOneResult(res.graphImage);
+      }).pipe(catchError(err => {
+        return of(err);
+      }));
   }
 
   calculateAssignmentTwoResult(formula: string, id: number): Observable<AssignmentTwoResult> {
     return this.http.post<AssignmentTwoResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
       return new AssignmentTwoResult(res.tableData, res.tableResults, res.hashCode);
-    });
+    }).pipe(catchError(err => {
+      return of(err);
+    }));
   }
 
   /**

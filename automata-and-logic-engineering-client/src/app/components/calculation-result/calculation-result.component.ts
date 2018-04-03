@@ -24,7 +24,6 @@ export class CalculationResultComponent implements OnInit {
   }
 
   getValuesFromMaps(map) {
-    console.log(map);
     let results: number[] = [];
     Object.keys(map).forEach(value => {
       results.push(map[value]);
