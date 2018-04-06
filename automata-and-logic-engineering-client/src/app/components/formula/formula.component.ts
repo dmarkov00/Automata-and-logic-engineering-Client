@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import {AssignmentResultService} from '../../services/assignment-result.service';
 import {DataService} from '../../services/data.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
@@ -10,7 +10,10 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './formula.component.html',
   styleUrls: ['./formula.component.css']
 })
-export class FormulaComponent implements OnInit {
+export class FormulaComponent implements OnInit, AfterViewInit {
+
+
+  @ViewChild('formula') formulaString: ElementRef;
 
   constructor(private assignmentResultService: AssignmentResultService,
               private dataService: DataService,
@@ -36,6 +39,10 @@ export class FormulaComponent implements OnInit {
           this.dataService.assignmentResult = result;
         }
       });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataService.formulaString = this.formulaString.nativeElement.defaultValue;
   }
 
   ngOnInit() {

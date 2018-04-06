@@ -5,7 +5,7 @@ import {AssignmentOneResult} from '../models/assignment-one-result';
 @Injectable()
 export class DataService {
   assignmentResult: any;
-
+  formulaString: string;
   constructor() {
   }
 }

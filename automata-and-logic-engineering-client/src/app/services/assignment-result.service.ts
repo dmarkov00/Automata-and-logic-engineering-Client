@@ -52,11 +52,7 @@ export class AssignmentResultService {
     }));
   }
   calculateAssignmentThreeResult(formula: string, id: number): Observable<AssignmentTwoResult> {
-    console.log(id);
-
     return this.http.post<AssignmentThreeResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
-      console.log('there');
-
       return new AssignmentThreeResult(res.tableData, res.simplifiedTableResults);
     }).pipe(catchError(err => {
       return of(err);

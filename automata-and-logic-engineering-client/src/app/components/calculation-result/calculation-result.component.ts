@@ -4,6 +4,8 @@ import {AssignmentOneResult} from '../../models/assignment-one-result';
 import {AssignmentTwoResult} from '../../models/assignment-two-result';
 import {forEach} from '@angular/router/src/utils/collection';
 import {AssignmentThreeResult} from "../../models/assignment-three-result";
+import {ActivatedRoute} from "@angular/router";
+import {AssignmentResultService} from "../../services/assignment-result.service";
 
 @Component({
   selector: 'app-calculation-result',
@@ -12,7 +14,7 @@ import {AssignmentThreeResult} from "../../models/assignment-three-result";
 })
 export class CalculationResultComponent implements OnInit {
 
-  constructor(public dataService: DataService) {
+  constructor(private assignmentResultService: AssignmentResultService, public dataService: DataService, private route: ActivatedRoute) {
   }
 
   defineType(result: any): number {
@@ -36,9 +38,26 @@ export class CalculationResultComponent implements OnInit {
     return results;
   }
 
+  calculateResult(formula: string): void {
+
+
+    const assignmentID = +this.route.snapshot.paramMap.get('id');
+
+    this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
+      .subscribe(result => {
+        if (result.status == 400) {
+          alert("Received an incorrect formula.")
+        }
+        else {
+          this.dataService.assignmentResult = result;
+        }
+      });
+  }
+
 
   ngOnInit() {
-
+    console.log(" on inti")
+    this.calculateResult(this.dataService.formulaString);
   }
 }
 
