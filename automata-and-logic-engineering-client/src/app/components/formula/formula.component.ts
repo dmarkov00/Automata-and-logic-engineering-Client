@@ -12,7 +12,6 @@ import 'rxjs/add/operator/switchMap';
 })
 export class FormulaComponent implements OnInit, AfterViewInit {
 
-
   @ViewChild('formula') formulaString: ElementRef;
 
   constructor(private assignmentResultService: AssignmentResultService,
@@ -25,13 +24,13 @@ export class FormulaComponent implements OnInit, AfterViewInit {
     if (!formula) {
       return;
     }
-    // ToDo: retrieve the id from the url
-    const id = this.route.snapshot.paramMap.get('id');
 
-    const assignmentID = 3;
-    this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
+
+    this.dataService.formulaString = formula;
+
+
+    this.assignmentResultService.calculateAssignmentResult(formula, this.dataService.currentAssignmentId)
       .subscribe(result => {
-        console.log(result);
         if (result.status == 400) {
           alert("Received an incorrect formula.")
         }
@@ -42,9 +41,12 @@ export class FormulaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataService.formulaString = this.formulaString.nativeElement.defaultValue;
+
+    this.dataService.formulaString = this.formulaString.nativeElement.value;
+    // console.log(this.formulaString.nativeElement.value);
   }
 
   ngOnInit() {
+
   }
 }

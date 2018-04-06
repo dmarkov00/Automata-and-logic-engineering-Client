@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {AssignmentOneResult} from '../../models/assignment-one-result';
 import {AssignmentTwoResult} from '../../models/assignment-two-result';
-import {forEach} from '@angular/router/src/utils/collection';
+
 import {AssignmentThreeResult} from "../../models/assignment-three-result";
 import {ActivatedRoute} from "@angular/router";
 import {AssignmentResultService} from "../../services/assignment-result.service";
@@ -38,26 +38,28 @@ export class CalculationResultComponent implements OnInit {
     return results;
   }
 
-  calculateResult(formula: string): void {
+  calculateResult(): void {
 
+    this.route.url.subscribe(url => {
+      let formula = this.dataService.formulaString;
+      const assignmentID = +url[1].path;
+      this.dataService.currentAssignmentId = assignmentID;
+      this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
+        .subscribe(result => {
+          if (result.status == 400) {
+            alert("Received an incorrect formula.")
+          }
+          else {
+            this.dataService.assignmentResult = result;
+          }
+        });
+    });
 
-    const assignmentID = +this.route.snapshot.paramMap.get('id');
-
-    this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
-      .subscribe(result => {
-        if (result.status == 400) {
-          alert("Received an incorrect formula.")
-        }
-        else {
-          this.dataService.assignmentResult = result;
-        }
-      });
   }
 
 
   ngOnInit() {
-    console.log(" on inti")
-    this.calculateResult(this.dataService.formulaString);
+    this.calculateResult();
   }
 }
 

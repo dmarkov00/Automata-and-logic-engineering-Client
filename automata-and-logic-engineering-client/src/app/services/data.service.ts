@@ -6,6 +6,7 @@ import {AssignmentOneResult} from '../models/assignment-one-result';
 export class DataService {
   assignmentResult: any;
   formulaString: string;
+  currentAssignmentId: number;
   constructor() {
   }
 }
