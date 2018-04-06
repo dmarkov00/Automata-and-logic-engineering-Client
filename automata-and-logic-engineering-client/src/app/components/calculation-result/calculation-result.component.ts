@@ -3,6 +3,7 @@ import {DataService} from '../../services/data.service';
 import {AssignmentOneResult} from '../../models/assignment-one-result';
 import {AssignmentTwoResult} from '../../models/assignment-two-result';
 import {forEach} from '@angular/router/src/utils/collection';
+import {AssignmentThreeResult} from "../../models/assignment-three-result";
 
 @Component({
   selector: 'app-calculation-result',
@@ -20,6 +21,9 @@ export class CalculationResultComponent implements OnInit {
     }
     if (result instanceof AssignmentTwoResult) {
       return 2;
+    }
+    if (result instanceof AssignmentThreeResult) {
+      return 3;
     }
   }
 

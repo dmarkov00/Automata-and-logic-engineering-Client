@@ -15,8 +15,6 @@ export class FormulaComponent implements OnInit {
   constructor(private assignmentResultService: AssignmentResultService,
               private dataService: DataService,
               private route: ActivatedRoute) {
-
-
   }
 
   calculateResult(formula: string): void {
@@ -27,10 +25,10 @@ export class FormulaComponent implements OnInit {
     // ToDo: retrieve the id from the url
     const id = this.route.snapshot.paramMap.get('id');
 
-    const assignmentID = 2;
+    const assignmentID = 3;
     this.assignmentResultService.calculateAssignmentResult(formula, assignmentID)
       .subscribe(result => {
-
+        console.log(result);
         if (result.status == 400) {
           alert("Received an incorrect formula.")
         }
@@ -38,11 +36,8 @@ export class FormulaComponent implements OnInit {
           this.dataService.assignmentResult = result;
         }
       });
-
   }
 
   ngOnInit() {
-
   }
-
 }

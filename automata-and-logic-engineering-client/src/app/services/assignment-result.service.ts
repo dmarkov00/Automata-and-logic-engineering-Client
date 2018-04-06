@@ -9,6 +9,7 @@ import {AssignmentOneResult} from '../models/assignment-one-result';
 import {AssignmentTwoResult} from '../models/assignment-two-result';
 import 'rxjs/add/operator/map';
 import {catchError} from "rxjs/operators";
+import {AssignmentThreeResult} from "../models/assignment-three-result";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json', observe: 'response'})
@@ -29,7 +30,8 @@ export class AssignmentResultService {
         return this.calculateAssignmentOneResult(formula, id);
       case 2:
         return this.calculateAssignmentTwoResult(formula, id);
-
+      case 3:
+        return this.calculateAssignmentThreeResult(formula, id);
     }
   }
 
@@ -49,7 +51,17 @@ export class AssignmentResultService {
       return of(err);
     }));
   }
+  calculateAssignmentThreeResult(formula: string, id: number): Observable<AssignmentTwoResult> {
+    console.log(id);
 
+    return this.http.post<AssignmentThreeResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
+      console.log('there');
+
+      return new AssignmentThreeResult(res.tableData, res.simplifiedTableResults);
+    }).pipe(catchError(err => {
+      return of(err);
+    }));
+  }
   /**
    * Handle Http operation that failed.
    * Let the app continue.
