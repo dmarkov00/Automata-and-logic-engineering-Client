@@ -35,13 +35,16 @@
       </tr>
       </tbody>
     </table>
-    <div *ngSwitchCase="4" class="col ">
-      <p>Disjunctive normal form truth table:</p>
-
-      <p>Disjunctive normal form simplified table:</p>
-
-    </div>
 
   </div>
+  <div *ngSwitchCase="4" class="col ">
+    <h3>Disjunctive normal form for the truth table:</h3>
+    <p>{{dataService.assignmentResult.disjunctiveNormalFormTruthTable}}</p>
+    <br>
+    <hr>
+    <h3>Disjunctive normal form for the simplified truth table:</h3>
+    <p>{{dataService.assignmentResult.disjunctiveNormalFormSimplifiedTruthTable}}</p>
 
+
+  </div>
 </div>

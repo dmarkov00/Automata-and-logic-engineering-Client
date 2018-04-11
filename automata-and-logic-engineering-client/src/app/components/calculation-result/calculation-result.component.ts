@@ -28,9 +28,9 @@ export class CalculationResultComponent implements OnInit {
     if (result instanceof AssignmentThreeResult) {
       return 3;
     }
-    // if (result instanceof AssignmentFourResult) {
-    //   return 4;
-    // }
+    if (result instanceof AssignmentFourResult) {
+      return 4;
+    }
   }
 
   getValuesFromMaps(map) {
