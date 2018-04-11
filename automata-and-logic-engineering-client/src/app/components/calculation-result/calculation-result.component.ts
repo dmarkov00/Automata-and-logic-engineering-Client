@@ -6,6 +6,7 @@ import {AssignmentTwoResult} from '../../models/assignment-two-result';
 import {AssignmentThreeResult} from "../../models/assignment-three-result";
 import {ActivatedRoute} from "@angular/router";
 import {AssignmentResultService} from "../../services/assignment-result.service";
+import {AssignmentFourResult} from "../../models/assignment-four-result";
 
 @Component({
   selector: 'app-calculation-result',
@@ -27,6 +28,9 @@ export class CalculationResultComponent implements OnInit {
     if (result instanceof AssignmentThreeResult) {
       return 3;
     }
+    // if (result instanceof AssignmentFourResult) {
+    //   return 4;
+    // }
   }
 
   getValuesFromMaps(map) {

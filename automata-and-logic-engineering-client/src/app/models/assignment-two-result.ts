@@ -1,4 +1,3 @@
-import {AssignmentResult} from './assignment-result';
 
 export class AssignmentTwoResult {
 

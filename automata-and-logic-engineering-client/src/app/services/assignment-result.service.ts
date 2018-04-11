@@ -10,6 +10,7 @@ import {AssignmentTwoResult} from '../models/assignment-two-result';
 import 'rxjs/add/operator/map';
 import {catchError} from "rxjs/operators";
 import {AssignmentThreeResult} from "../models/assignment-three-result";
+import {AssignmentFourResult} from "../models/assignment-four-result";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json', observe: 'response'})
@@ -32,10 +33,12 @@ export class AssignmentResultService {
         return this.calculateAssignmentTwoResult(formula, id);
       case 3:
         return this.calculateAssignmentThreeResult(formula, id);
+      case 4:
+        return this.calculateAssignmentFourResult(formula, id);
     }
   }
 
-  calculateAssignmentOneResult(formula: string, id: number): Observable<AssignmentOneResult> {
+  calculateAssignmentOneResult(formula: string, id: number): Observable<any> {
     return this.http.post<AssignmentOneResult>(this.baseUrl + id, {'formula': formula}, httpOptions)
       .map(res => {
         return new AssignmentOneResult(res.graphImage);
@@ -44,37 +47,27 @@ export class AssignmentResultService {
       }));
   }
 
-  calculateAssignmentTwoResult(formula: string, id: number): Observable<AssignmentTwoResult> {
+  calculateAssignmentTwoResult(formula: string, id: number): Observable<any> {
     return this.http.post<AssignmentTwoResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
       return new AssignmentTwoResult(res.tableData, res.tableResults, res.hashCode);
     }).pipe(catchError(err => {
       return of(err);
     }));
   }
-  calculateAssignmentThreeResult(formula: string, id: number): Observable<AssignmentTwoResult> {
+
+  calculateAssignmentThreeResult(formula: string, id: number): Observable<any> {
     return this.http.post<AssignmentThreeResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
       return new AssignmentThreeResult(res.tableData, res.simplifiedTableResults);
     }).pipe(catchError(err => {
       return of(err);
     }));
   }
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  handleError<T>(operation = 'operation', result ?: T) {
-    return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+  calculateAssignmentFourResult(formula: string, id: number): Observable<any> {
+    return this.http.post<AssignmentFourResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
+      return new AssignmentFourResult(res.disjunctiveNormalFormTruthTable, res.disjunctiveNormalFormSimplifiedTruthTable);
+    }).pipe(catchError(err => {
+      return of(err);
+    }));
   }
 }
