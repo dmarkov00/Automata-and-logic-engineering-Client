@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import {catchError} from "rxjs/operators";
 import {AssignmentThreeResult} from "../models/assignment-three-result";
 import {AssignmentFourResult} from "../models/assignment-four-result";
+import {AssignmentFiveResult} from "../models/assignment-five-result";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json', observe: 'response'})
@@ -35,6 +36,8 @@ export class AssignmentResultService {
         return this.calculateAssignmentThreeResult(formula, id);
       case 4:
         return this.calculateAssignmentFourResult(formula, id);
+      case 5:
+        return this.calculateAssignmentFive(formula, id);
     }
   }
 
@@ -66,6 +69,14 @@ export class AssignmentResultService {
   calculateAssignmentFourResult(formula: string, id: number): Observable<any> {
     return this.http.post<AssignmentFourResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
       return new AssignmentFourResult(res.disjunctiveNormalFormTruthTable, res.disjunctiveNormalFormSimplifiedTruthTable);
+    }).pipe(catchError(err => {
+      return of(err);
+    }));
+  }
+
+  private calculateAssignmentFive(formula: string, id: number): Observable<any> {
+    return this.http.post<AssignmentFiveResult>(this.baseUrl + id, {'formula': formula}, httpOptions).map(res => {
+      return new AssignmentFiveResult(res.nandifiedFormula);
     }).pipe(catchError(err => {
       return of(err);
     }));
