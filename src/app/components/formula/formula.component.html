@@ -1,0 +1,9 @@
+<div>
+  <label>Formula:
+    <input #formula value="&(=(A,B),|(C,D))"/>
+  </label>
+  <button class="btn btn-danger" (click)="calculateResult(formula.value);">
+    Calculate result
+  </button>
+</div>
+
