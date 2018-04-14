@@ -20,7 +20,7 @@ const httpOptions = {
 @Injectable()
 export class AssignmentResultService {
 
-  private baseUrl = 'http://localhost:8080/calculate/';
+  private baseUrl = 'https://ale-spring-service.herokuapp.com/calculate/';
 
   constructor(private http: HttpClient) {
   }
