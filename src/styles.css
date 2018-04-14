@@ -1,3 +1,4 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
 [class*="col-"] {
   margin-bottom: 4em;
 }
